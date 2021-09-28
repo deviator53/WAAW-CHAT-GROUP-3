@@ -1,0 +1,165 @@
+
+body{
+    padding:0;
+    margin: 0;;
+    border:0;
+}
+*{
+    box-sizing:border-box;
+}
+.body-main{
+    margin:0 !important;
+    padding:0 !important;
+    background:darkblue !important;
+}
+.btnn{
+    width:70px;
+    background: blue;
+    margin-top:1rem;
+    padding:10px;
+    border-radius:5px;
+    border:none;
+    color:white;
+    font-size: 15px;
+}
+.password{
+    margin-left:5px;
+    margin-top: 1rem;
+}
+.row-class{
+    display:grid;
+   grid-template-columns: 1fr 1fr;
+    justify-content: space-evenly;
+}
+.form-class{
+    background:rgb(235, 235, 247);
+    min-height:821px;
+}
+.form-box{
+    min-height:80vh;
+    max-height: 80vh;
+    position:absolute;
+    top:100px;
+    left:150px;
+    right:150px;
+    bottom:100px;
+    background:white;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 20px;
+
+}
+.box-1, .box-2{
+    min-height: 60vh;
+    
+}
+.box-1{
+    background:url('/images/group-3.png');
+    border-radius: 20px;
+    
+}
+
+.box-2{
+    padding:40px;
+    background:rgb(241, 241, 245);
+    border-radius: 0px 20px 20px 0px;
+    
+}
+
+.form-login{
+   
+    padding:0rem 3.75rem;
+}
+.email-input{
+    margin-left:4.1rem;
+}
+
+.user-input{
+    margin-left:2rem;
+}
+.password-input{
+    margin-left:2.2rem;
+}
+
+
+@media (max-width:600px){
+    .form-box{
+    display:grid;
+    background:none;
+    width:400px;
+    left:50px;
+    right:50px;
+    height:600px;
+    top:80px;
+    bottom:100px;
+    
+}
+.box-1{
+    background:none;
+    display:none;
+    
+}
+.box-2{
+    padding:20px;
+    border-radius: 30px;
+    margin:2rem;
+}
+.body-main{
+    min-height:100vh !important;
+    
+}
+.form-class{
+    min-height:500px;
+    background:none;
+}
+
+}
+
+@media(min-width:920px){
+    body-main{
+    margin:0;
+    padding:0;
+    background:darkblue;
+}
+.row-class{
+    display:grid;
+   grid-template-columns: 1fr 1fr;
+    justify-content: space-evenly;
+}
+.form-class{
+    background:rgb(235, 235, 247);
+    min-height:821px;
+}
+.form-box{
+    min-height:80vh;
+    max-height: 80vh;
+    position:absolute;
+    top:100px;
+    left:150px;
+    right:150px;
+    bottom:100px;
+    
+    display:grid;
+    grid-template-columns: 1fr 2fr;
+    border-radius: 20px;
+
+}
+
+}
+@media(min-width:1020px){
+    .form-box{
+    min-height:80vh;
+    max-height: 80vh;
+    position:absolute;
+    top:100px;
+    left:150px;
+    right:150px;
+    bottom:100px;
+    
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 20px;
+
+}
+
+}

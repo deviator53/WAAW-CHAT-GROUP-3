@@ -1,0 +1,103 @@
+body{
+    background-color: #fff;
+}
+.padding-0{
+    padding-right:0;
+    padding-left:0;
+}
+
+.def{
+    border: 1px solid rgb(8, 143, 177);
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;;
+    margin-top: 100px;
+}
+
+.btn-default{
+    color: #fff;
+    background-color: rgb(8, 143, 177);
+    border-radius: 20px;
+}
+/* STYLING FOR REGISTER PAGE */
+.register-container{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.register-container .register-content{
+    /* max-width: 900px; */
+    /* border: 2px solid black; */
+    padding: 25px 50px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+}
+.register-content h3{
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+.register-content p{
+    text-align: center;
+    margin-bottom: 30px;
+}
+ .inputBox{
+    position: relative;
+    margin-bottom: 20px;
+}
+ /* .inputBox label{
+    color: #111;
+    font-weight: bold;
+} */
+.inputBox input{
+    width: 100%;
+    display: inline-block;
+    text-indent:30px;
+    /* border-bottom: 1px solid #555; */
+    border: none;
+    border-bottom: 1px solid #111;
+    padding: 5px;
+    color: #111;
+    outline: none;
+    font-size: 16px;
+    font-weight: 400;
+}
+.inputBox input::-webkit-input-placeholder{
+    position: absolute;
+    color: #111;
+    font-weight: 300;
+    left: 20px;
+    
+}
+.inputBox input:focus{
+    border-bottom:2px solid rgb(8, 143, 177);
+}
+
+.inputBox i{
+    position: absolute;
+    left: 10px;
+     top: 10px;
+    color:rgb(8, 143, 177);
+}
+ .button{
+    font-size: 1em;
+    color: #fff;
+    width: 100%;
+    background: rgb(8, 143, 177);
+    display: inline-block;
+    letter-spacing: 2px;
+    transition: 0.5s;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.button:hover{
+    color: #fff;
+    background: #130606;
+    
+}
+
+/* STYLING REGISTER END */

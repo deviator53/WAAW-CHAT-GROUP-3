@@ -1,0 +1,43 @@
+<%-include('../partials/head')-%>
+<%-include('../partials/regs')-%>
+
+<div class="container h-100">
+    <div class="row justify-content-center align-items-center def py-5 w-75 mx-auto">
+        <div class="col-lg-4 col-sm-12 offset-md-2 ">
+            <img src="/images/signin-image.jpg" class="img-fluid">
+
+        </div>
+
+        <div class="col-lg-5 col-sm-12">
+                <h3 class='text-center'>LOGIN</h3>
+                <p class="text-center">Kindly log in to your account to continue.</p>
+                <span>
+                    <center><%- include('../../views/messages') -%></center>
+                </span>
+                <form action="/auth/login" method="POST">
+                    <div class="inputBox">
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="username" id="name" placeholder="username"  required>
+                    </div>
+                    <div class="inputBox">
+                        <i class="fas fa-unlock-alt"></i>
+                        <input type="password" name="password" id="password" placeholder="password" required>
+                    </div>
+                    <div class="inputBox">
+                        <p><a href="/auth/forgot-password">Forgot Password?</a></p>
+                    </div>
+                    
+                        <button class="button" type="submit">LOGIN</button>
+        
+                        <p>Don't Have Account?<a href="/auth/register">Sign Up</a></p>
+        
+                
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%-include('../partials/foot')-%>
+
+    
