@@ -1,6 +1,7 @@
 const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
 const verifyEmail = require('../../utils/verifyEmail');
+const forgotPasswordEmail = require('../../utils/forgotPasswordEmail')
 const randomstring = require('randomstring');
 
 const passport = require('passport');
@@ -62,6 +63,10 @@ module.exports = {
 
     forgotPassword: async (req, res) => {
         res.render('auth/forgot-password', {pageTitle: 'Forgot Password'})
+    },
+
+    changePassword: async (req, res) => {
+        res.render('auth/change-password', {pageTitle: 'Change Password'})
     },
 
     postRegister: async (req, res) => {
@@ -148,6 +153,22 @@ module.exports = {
     }),
 
     postForgotPassword: async (req, res) => {
+        try {
+            let {email} = req.body;
+            let user = await User.findOne({email});
+            if (!user) {
+                req.flash('error-message', 'Email not found');
+                res.redirect('back');
+            }
+        await forgotPasswordEmail(req, user.username, email, user.secretToken)
+            req.flash('success-message', 'A link to change your password has been sent to your email')
+            res.redirect('/auth/login');
+        } catch (err) {
+            console.log(err);
+        }
+    },
+
+    postChangePassword: async (req, res) => {
         try {
            let {item, password, confirmpassword} = req.body;
            if (password.length < 6) {

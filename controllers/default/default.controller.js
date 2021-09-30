@@ -4,7 +4,6 @@ const Comment = require('../../models/Comment');
 const bcrypt = require('bcryptjs');
 const {post} = require('../../routes/auth/auth.routes');
 
-
 module.exports = {
     home: async (req,res) => {
         let userExist = req.user;
@@ -52,6 +51,7 @@ module.exports = {
                 res.redirect('back');
             }
         });
+        
     },
 
     postReply: async (req, res) => {
@@ -139,28 +139,15 @@ module.exports = {
         req.flash('success-message', 'Password reset was successful');
         return res.redirect('/');
     },
-    postLike: async (req, res, next)=>{
-        let { id } = req.params;
-        if (!req.user) {
-            req.flash('error-message', 'You have to be logged in to perform this action.')
-            return res.redirect('/auth/login')
+    postLike: async (req, res)=>{
+        try {
+            let {id} = req.user._id;
+            Post.findByIdAndUpdate(req.params.postId, {
+                $push:{likes: id}
+            }, {new: true}).exec((err, result) => {})
+        } catch (err) {
+            console.log(err);
         }
-        Post.findById(id, async function(err, post) {
-
-            for await (let like of post.likedBy) {
-                let test = like == req.user.id;
-                if (test) {
-                    req.flash("error-message", "Not allowed! You can only like a post once.");
-                    return res.redirect("back");
-                }
-
-            }
-            await post.likedBy.push(req.user.id);
-            await post.save();
-            return res.redirect("back")
-
-        });
-
+        
     }
-
 }

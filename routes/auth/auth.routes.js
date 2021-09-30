@@ -10,7 +10,9 @@ const {
     postVerify,
     logout,
     forgotPassword,
-    postForgotPassword} = require('../../controllers/auth/auth.controller');
+    postForgotPassword,
+    changePassword,
+    postChangePassword} = require('../../controllers/auth/auth.controller');
 
 
 router.route('/register')
@@ -31,5 +33,9 @@ router.route('/logout')
 router.route('/forgot-Password')
     .get(forgotPassword)
     .post(postForgotPassword);
+
+router.route('/change-password')
+    .get(changePassword)
+    .post(postChangePassword);
 
 module.exports = router;

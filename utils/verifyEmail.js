@@ -6,11 +6,11 @@ const verifyUserEmail = async (req, username, email, secretToken) => {
         <br/>
         <br/>
 
-        Thank you for registering an account with us at Group3WAAWMessager.com
+        Thank you for registering an account with us at WAAWCHAT.com
         <br/><br/>
         Please click the link below or copy to any browser to verify your account:
         <br/>
-        <a href="http://${req.headers.host}/auth/verify-token/${secretToken}">
+        <a href="http://${req.headers.host}/auth/verify-token">
             http://${req.headers.host}/auth/verify-token/${secretToken}
         </a>
         <br>
@@ -19,7 +19,7 @@ const verifyUserEmail = async (req, username, email, secretToken) => {
         <br/><br/>
         Kind regards,
         <br/><br/>
-        <strong>Team WAAWMessager.</strong>
+        <strong>Team WAAWCHAT.</strong>
     `;
 
     await sendEmail(

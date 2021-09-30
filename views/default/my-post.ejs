@@ -4,15 +4,16 @@
 
 
 
-<%- include('../../views/messages') -%>
+
 
 <div class="pt-5">
 
 <% posts.forEach(item => { %>
     <div class="jumbotron mt-5 p-2 col-md-8 offset-md-2">
+        <%- include('../../views/messages') -%>
         <div class="media mt-0">
             <span class="rounded-circle profile mr-3">DP</span>
-            <div class="media-body">
+            <div class="media-body mr-5">
                 <h5 class="mt-0">
                     <strong><%= item.user.username %> </strong>
                 </h5>
@@ -26,62 +27,68 @@
                     </footer>
                 </blockquote>
 
-                                 <!-- Like and Comment Section -->
-                                 <div>
-                                    <div class="d-flex flex-row fs-12">
-                                        <div class="like p-2 cursor">
-                                            <i class="fas fa-thumbs-up color-default"></i>
-                                            <%-item.likedBy.length%><a href="/add-like/<%-item.id%>">1<span class="ml-1">Like</span></a>
-                                        </div>
-                                        <div class="like p-2 cursor">
-                                            <i class="fas fa-comment color-default"></i>
-                                            <span class="ml-1"> <%-item.comments.length %> Comment(s)</span>
-                                        </div>
-                                    </div>
+                    <!-- Like and Comment Section -->
+                    <div>
+                    <div class="d-flex flex-row fs-12">
+                        <div class="like p-2 cursor">
+                            <i class="fas fa-thumbs-up color-default"></i>
+                            <%-item.likes.length%><a href="/add-like/<%-item.id%>"><span class="ml-1">Like</span></a>
+                        </div>
+                        <div class="like p-2 cursor">
+                            <i class="fas fa-comment color-default"></i>
+                            <span class="ml-1"> <%-item.comments.length %> Comment(s)</span>
+                        </div>
+                    </div>
+                </div>
+                        
+                <!-- Comment 1 -->
+                        
+                <% item.comments.forEach(comm => { %>
+                <div class="mt-2 bg-light">
+                    <div class="media mt-0 pt-2">
+                        <span class="rounded-circle profile mr-3 ml-2">DP</span>
+                        <div class="media-body">
+                            <div>
+                                <h5 class="mt-0"><%= comm.user.username %> </h5>
+                                <p>  <%- comm.comment -%></p>
+                            </div>
+                            <div class="d-flex flex-row fs-12">
+                                <div class="like p-2 cursor">
+                                    <i class="fas fa-thumbs-up color-default"></i>
+                                    <span class="ml-1">Like</span>
                                 </div>
-                                       <!-- Comment 1 -->
-                                       <% item.comments.forEach(comm => { %>
-                
-                                <div class="mt-2 bg-light">
-                                    <div class="media mt-0 pt-2">
-                                        <span class="rounded-circle profile mr-3">DP</span>
-                                        <div class="media-body">
-                                            <div>
-                                                <h5 class="mt-0"><%= comm.user.username %> </h5>
-                                                <p>  <%- comm.comment -%></p>
-                                            </div>
-                                            <div class="d-flex flex-row fs-12">
-                                                <div class="like p-2 cursor">
-                                                    <i class="fas fa-thumbs-up color-default"></i>
-                                                    <span class="ml-1">Like</span>
-                                                </div>
-                                                <div class="like p-2 cursor">
-                                                    <i class="fas fa-comment color-default"></i>
-                                                    <span class="ml-1">Comment</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="like p-2 cursor">
+                                    <i class="fas fa-comment color-default"></i>
+                                    <span class="ml-1">Comment</span>
                                 </div>
-                                <% }) %>
-                                        <!-- Comment 1 end -->
-                                <form action="/<%= item._id %>" method="POST">
-                                    <div class="bg-light p-2 mb-5 ">
-                                        <div class="d-flex flex-row align-items-start">
-                                            <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-                                            <textarea class="form-control ml-1 shadow-none textarea" name="newcomment"></textarea>
-                                        </div>
-                                        <div class="mt-2 text-right">
-                                            <button class="btn btn-default btn-sm shadow-none" type="submit">Post comment</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <!-- Like and Comment Section End -->
+                            </div>
+                            <blockquote class="blockquote mb-0">
+                                <footer class="blockquote-footer"> Posted: <cite title="Source Title">
+                                    <%- moment(comm.createdAt).fromNow() %></cite>
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+                        
+                <!-- Comment 1 end -->
 
+                <form action="/<%= item._id %>" method="POST">
+                    <div class="bg-light p-2 mb-5 ">
+                        <div class="d-flex flex-row align-items-start">
+                            <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                            <textarea class="form-control ml-1 shadow-none textarea" name="newcomment"></textarea>
+                        </div>
+                        <div class="mt-2 text-right">
+                            <button class="btn btn-default btn-sm shadow-none" type="submit">Post comment</button>
+                        </div>
+                    </div>
+                </form>
+                <!-- Like and Comment Section End -->
             </div>
         </div>
     </div>
-
 <% }) %>
 </div>
 
