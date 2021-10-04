@@ -11,6 +11,9 @@ const likeSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Comment'
     },
+    like: {
+        type: String,
+    },
 
     PostId: {
         type: Schema.Types.ObjectId,

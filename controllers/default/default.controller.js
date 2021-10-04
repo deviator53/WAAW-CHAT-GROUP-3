@@ -25,6 +25,23 @@ module.exports = {
         res.render('default/reset-password', {pageTitle: 'Password Reset'})
     },
 
+    deletePost: async (req, res) => {
+        try {
+            const postId = req.params.postId; 
+
+			let deletedPost = await Post.findByIdAndDelete(postId);
+
+			if (!deletedPost) {
+				req.flash('error-message','Post could not be deleted');
+				return res.redirect('back');
+			}
+			req.flash('success-message', 'Post deleted successfully');
+			res.redirect("back");
+		} catch (err) {
+			console.log(err);
+		}
+    },
+
     postHome: async (req, res) => {
         let loggedUser = req.user;
         let {value} = req.body;
@@ -141,13 +158,20 @@ module.exports = {
     },
     postLike: async (req, res)=>{
         try {
-            let {id} = req.user._id;
-            Post.findByIdAndUpdate(req.params.postId, {
-                $push:{likes: id}
-            }, {new: true}).exec((err, result) => {})
-        } catch (err) {
-            console.log(err);
-        }
-        
-    }
+			let postExist = await Post.findOne({ _id: req.params.postId });
+			let likeId = req.user.id;
+			if (!postExist.likes.includes(likeId)) {
+				await postExist.updateOne({ $push: { likes: likeId } });
+				req.flash("success-message", "Post Liked!");
+				return res.redirect("back");
+			} else {
+				await postExist.updateOne({ $pull: { likes: likeId } });
+				req.flash("success-message", "Post Unliked!");
+				return res.redirect("back");
+			}
+		} catch (err) {
+			console.log(err);
+		}
+    
+     }
 }

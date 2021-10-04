@@ -1,3 +1,4 @@
+//Take Page to the top function
 $(document).ready(function(){
 	$(window).scroll(function () {
 			if ($(this).scrollTop() > 50) {
@@ -15,10 +16,12 @@ $(document).ready(function(){
 		});
 });
 
-      
+// Flash message fadeout function
 $(document).ready(function(){
     setTimeout(function(){
     $('.just-go').fadeOut().slideUp(300);
     }, 5000);
 });
-    
+
+
+

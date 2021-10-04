@@ -29,3 +29,8 @@
     right: 25px;
     display: none;
 }
+#like{
+    outline: none;
+    border: none;
+    background: none;
+}
