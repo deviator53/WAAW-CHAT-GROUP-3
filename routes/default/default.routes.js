@@ -5,6 +5,7 @@ const {home,
     resetPassword, 
     postResetPassword, 
     poster,
+    deletePost,
     postReply,
     postLike,
     search} = require('../../controllers/default/default.controller');
@@ -24,8 +25,11 @@ router.route('/reset-password')
 router.route('/:postId')
       .post(isLoggedIn, postReply);
 
-router.route('/:likeId')
-      .put(isLoggedIn, postLike);
+router.route('/delete-post/:postId')
+      .get(isLoggedIn, deletePost);
+
+router.route('/like-post/:postId')
+      .post(isLoggedIn, postLike);
 
 router.route('/my-post')
       .get(isLoggedIn, poster)

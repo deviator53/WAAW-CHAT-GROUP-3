@@ -76,7 +76,7 @@ body{
 .inputBox i{
     position: absolute;
     left: 10px;
-     top: 10px;
+     top: 10px; 
     color:rgb(8, 143, 177);
 }
  .button{

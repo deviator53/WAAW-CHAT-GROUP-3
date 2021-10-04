@@ -26,21 +26,21 @@ module.exports = {
         res.render('default/reset-password', {pageTitle: 'Password Reset'})
     },
 
-    search: async (req, res) => {
-        let userExist = req.user;
-        let postComment = req.comments;
-        let userPosts = await Post.find({}).sort({_id: -1}).populate('user')
-        .populate({
-            path: 'comments',
-            models: 'Comment',
-            populate: {
-                path: 'user',
-                models: 'User'
-            }
-        });
-        console.log(postComment);
-        res.sendfile('default/search-post', {posts: userPosts, user: userExist, comments: postComment})
-        // res.render('default/search-post', {pageTitle: 'Search Post'})
+    deletePost: async (req, res) => {
+        try {
+            const postId = req.params.postId; 
+
+			let deletedPost = await Post.findByIdAndDelete(postId);
+
+			if (!deletedPost) {
+				req.flash('error-message','Post could not be deleted');
+				return res.redirect('back');
+			}
+			req.flash('success-message', 'Post deleted successfully');
+			res.redirect("back");
+		} catch (err) {
+			console.log(err);
+		}
     },
 
     postHome: async (req, res) => {
@@ -159,27 +159,20 @@ module.exports = {
     },
     postLike: async (req, res)=>{
         try {
-            let likedUser = req.user;
-            let likePost = req.params.likeId;
-            let {likeB} = req.body;
-            let like = await Post.findByIdAndUpdate({_id: likePost});
-            console.log("::::::" ,like);
-            let newLike = new Like ({
-                userId: likedUser._id,
-                likeId: likeB,
-                commentId: likePost.comment._id
-            });
-            like.likes.push(newLike._id);
-            await like.save();
-
-            // let rlike = Post.findByIdAndUpdate(req.params.id, {
-            //     $push:{likes: like}
-            // }, {new: true});
-            // like.likes.unshift({user: req.user.id});
-            // await like.save();
-        } catch (err) {
-            console.log(err);
-        }
-        
-    }
+			let postExist = await Post.findOne({ _id: req.params.postId });
+			let likeId = req.user.id;
+			if (!postExist.likes.includes(likeId)) {
+				await postExist.updateOne({ $push: { likes: likeId } });
+				req.flash("success-message", "Post Liked!");
+				return res.redirect("back");
+			} else {
+				await postExist.updateOne({ $pull: { likes: likeId } });
+				req.flash("success-message", "Post Unliked!");
+				return res.redirect("back");
+			}
+		} catch (err) {
+			console.log(err);
+		}
+    
+     }
 }

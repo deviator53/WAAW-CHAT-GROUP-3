@@ -9,7 +9,7 @@ const forgotPasswordEmail = async (req, username, email, secretToken) => {
 
         Thank you for using WAAWCHAT.
         <br/><br/>
-        Please click the link below or copy to any browser to change the your password:
+        Please click the link below or copy to any browser to change your password:
         <br/>
         <a href="http://${req.headers.host}/auth/change-password">
             http://${req.headers.host}/auth/change-password/${secretToken}
