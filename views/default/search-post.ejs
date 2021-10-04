@@ -2,8 +2,36 @@
 <%-include('../partials/header')-%>
 <%-include('../partials/logs')-%>
 
+<div class="container col-12 col-md-8 offset-md-2 msg-form">
+    <%- include('../../views/messages') -%>
+    <form action="" method="POST" class="mt-5">
+        <input type="text" name="searchPost" placeholder="Search other users and posts..." autocomplete="on">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+</div>
 
 
+<% posts.forEach(item => { %>
+<div class="jumbotron mt-5 p-2 col-md-8 offset-md-2">
+    <div class="media mt-0">
+        <span class="rounded-circle profile mr-3">DP</span>
+        <div class="media-body mr-5">
+            <h5 class="mt-0">
+                <strong><%= item.user.username %> </strong>
+            </h5>
+            <p>
+                <%- item.posts -%>
+            </p>
 
+            <blockquote class="blockquote mb-0">
+                <footer class="blockquote-footer"> Created: <cite title="Source Title">
+                        <%- moment(item.createdAt).fromNow() %></cite>
+                </footer>
+            </blockquote>
+        </div>
+    </div>
+</div>
+<% }) %>
 
-<%-include('../partials/foot')-%>
+            <%-include('../partials/foot')-%>

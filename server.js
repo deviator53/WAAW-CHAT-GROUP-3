@@ -13,7 +13,7 @@ const bcrypt = require('bcryptjs');
 const flash = require('connect-flash');
 const MongoStore = require('connect-mongo');
 const { connected } = require('process');
-const port = process.env.PORT || 200;
+const port = process.env.PORT || 2000;
 
 //Database Connection
 mongoose.connect('mongodb://localhost/waawchat1')

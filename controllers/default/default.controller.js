@@ -3,6 +3,7 @@ const User = require('../../models/User');
 const Comment = require('../../models/Comment');
 const bcrypt = require('bcryptjs');
 const {post} = require('../../routes/auth/auth.routes');
+const Like = require('../../models/Like');
 
 module.exports = {
     home: async (req,res) => {
@@ -23,6 +24,23 @@ module.exports = {
 
     resetPassword: async (req, res) => {
         res.render('default/reset-password', {pageTitle: 'Password Reset'})
+    },
+
+    search: async (req, res) => {
+        let userExist = req.user;
+        let postComment = req.comments;
+        let userPosts = await Post.find({}).sort({_id: -1}).populate('user')
+        .populate({
+            path: 'comments',
+            models: 'Comment',
+            populate: {
+                path: 'user',
+                models: 'User'
+            }
+        });
+        console.log(postComment);
+        res.sendfile('default/search-post', {posts: userPosts, user: userExist, comments: postComment})
+        // res.render('default/search-post', {pageTitle: 'Search Post'})
     },
 
     postHome: async (req, res) => {
@@ -141,10 +159,24 @@ module.exports = {
     },
     postLike: async (req, res)=>{
         try {
-            let {id} = req.user._id;
-            Post.findByIdAndUpdate(req.params.postId, {
-                $push:{likes: id}
-            }, {new: true}).exec((err, result) => {})
+            let likedUser = req.user;
+            let likePost = req.params.likeId;
+            let {likeB} = req.body;
+            let like = await Post.findByIdAndUpdate({_id: likePost});
+            console.log("::::::" ,like);
+            let newLike = new Like ({
+                userId: likedUser._id,
+                likeId: likeB,
+                commentId: likePost.comment._id
+            });
+            like.likes.push(newLike._id);
+            await like.save();
+
+            // let rlike = Post.findByIdAndUpdate(req.params.id, {
+            //     $push:{likes: like}
+            // }, {new: true});
+            // like.likes.unshift({user: req.user.id});
+            // await like.save();
         } catch (err) {
             console.log(err);
         }

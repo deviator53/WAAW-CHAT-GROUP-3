@@ -42,9 +42,11 @@
                  <!-- Like and Comment Section -->
                 <div>
                     <div class="d-flex flex-row fs-12">
-                        <div class="like p-2 cursor">
-                            <i class="fas fa-thumbs-up color-default"></i>
-                            <%-item.likes.length%><button id="like" onClick="like()" type="submit"><span class="ml-1">Like</span></button>
+                        <div class="like p-2 cursor">                       
+                            <a class="likeBtn" name="likeB" id="like" onClick="like()" type="submit">   
+                                <i class="fas fa-thumbs-up color-default"></i>
+                            </a>
+                            <span class="ml-1"><%-item.likes.length %></span><span class="ml-1">Like(s)</span>
                         </div>
                         <div class="like p-2 cursor">
                             <i class="fas fa-comment color-default"></i>
@@ -52,6 +54,25 @@
                         </div>
                     </div>
                 </div>
+
+                <script type="text/javascript">
+                    let likeIcon = document.querySelector("#like");
+
+                    let clicked = false;
+                    likeIcon.addEventListener("click", (like) => {
+                        likeIcon.value = parseInt(item.likes.length) + 1;
+                        if (!clicked) {
+                            clicked = true;
+                            likeIcon.innerHTML = `<i class="fas fa-thumbs-up color-default"></i>`
+                        }else {
+                            clicked = false;
+                            likeIcon.innerHTML = `<i class="fas fa-thumbs-up color-default"></i>`
+                        }
+                    });
+
+                </script>
+
+
                        <!-- Comment 1 -->
                     <% item.comments.forEach(comm => { %>
                 <div class="mt-2 bg-light">
