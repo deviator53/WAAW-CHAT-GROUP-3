@@ -10,6 +10,16 @@ const commentSchema = new Schema({
     comment: {
         type: String
     },
+
+    likes: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'like'
+    }],
+
+    comments: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'comment'
+    }]
     
 },{timestamps:true});
 

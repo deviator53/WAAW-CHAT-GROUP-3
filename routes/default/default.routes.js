@@ -8,7 +8,7 @@ const {home,
     deletePost,
     postReply,
     postLike,
-    search} = require('../../controllers/default/default.controller');
+    commentLike} = require('../../controllers/default/default.controller');
 
 const {isLoggedIn} = require('../../config/authorizations');
 
@@ -31,12 +31,15 @@ router.route('/delete-post/:postId')
 router.route('/like-post/:postId')
       .post(isLoggedIn, postLike);
 
+router.route('/like-comment/:commentId')
+      .post(isLoggedIn, commentLike);
+
 router.route('/my-post')
-      .get(isLoggedIn, poster)
+      .get(isLoggedIn, poster);
 
 router.route('/search-post')
-      .get(isLoggedIn, search)
-      .post(isLoggedIn)
+      .get(isLoggedIn)
+      .post(isLoggedIn);
 
 
 module.exports = router;

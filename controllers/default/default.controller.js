@@ -173,6 +173,24 @@ module.exports = {
 		} catch (err) {
 			console.log(err);
 		}
-    
-     }
+    },
+    commentLike: async (req, res) => {
+        try {
+            let commentId = req.user.id;
+            let commentExist = await Comment.findOne({_id: req.params.commentId});
+            // console.log(commentExist);
+            if (!commentExist.likes.includes(commentId)) {
+                await commentExist.updateOne({$push: {likes: commentId}});
+                req.flash("success-message", "Comment Liked");
+                return res.redirect('back');
+            } else {
+                await commentExist.updateOne({$pull: {likes: commentId}});
+                req.flash("success-message", "Comment Unliked");
+                return res.redirect('back');
+            }
+        } catch (err) {
+            console.log(err);
+        } 
+    },
+
 }
